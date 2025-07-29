@@ -100,7 +100,6 @@ public class playercontroller : MonoBehaviour
         Attack();
         RestoreTimeScale();
         FlashWhileInvincible();
-        walking();
     }
     private void FixedUpdate()
     {
@@ -126,16 +125,11 @@ public class playercontroller : MonoBehaviour
             pstate.lookingRight = true;
         }
     }
-
-    public void walking()
-    {
-        if(Grounded() && xAsis != 0 && !pstate.Dashing && !pstate.recoilingX && !pstate.recoilingY) pstate.walking = true;
-        else pstate.walking = false;
-    }
     private void Move()
     {
         rb.linearVelocity = new Vector2 (walkSpeed * xAsis, rb.linearVelocity.y);
         anim.SetBool("Walking", rb.linearVelocity.x != 0 && Grounded());
+        pstate.walking = (Grounded() && xAsis != 0 && !pstate.Dashing && !pstate.recoilingX && !pstate.recoilingY);
     }
     void StratDash()
     {
