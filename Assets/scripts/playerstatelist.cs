@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class playerstatelist : MonoBehaviour
 {
+    public bool OnGround;
+    public bool walking;
     public bool jumping = false;
     public bool Dashing = false;
     public bool recoilingX, recoilingY;

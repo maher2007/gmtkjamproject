@@ -72,8 +72,6 @@ public class playercontroller : MonoBehaviour
         {
             Instanece = this;
         }
-        Health = (int)maxHealth;
-        
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -102,6 +100,7 @@ public class playercontroller : MonoBehaviour
         Attack();
         RestoreTimeScale();
         FlashWhileInvincible();
+        walking();
     }
     private void FixedUpdate()
     {
@@ -126,6 +125,12 @@ public class playercontroller : MonoBehaviour
             transform.localScale = new Vector2(1, transform.localScale.y);
             pstate.lookingRight = true;
         }
+    }
+
+    public void walking()
+    {
+        if(Grounded() && xAsis != 0 && !pstate.Dashing && !pstate.recoilingX && !pstate.recoilingY) pstate.walking = true;
+        else pstate.walking = false;
     }
     private void Move()
     {
@@ -273,7 +278,7 @@ public class playercontroller : MonoBehaviour
 
     public void TakeDamge(float _damge)
     {
-        Health -= Mathf.RoundToInt(_damge);
+        health -= Mathf.RoundToInt(_damge);
         StartCoroutine(StopTakingDamage());
     }
 
@@ -306,43 +311,10 @@ public class playercontroller : MonoBehaviour
             }
         }
     }
-    public void HitStopTime(float _newTimeScale,int _restoreSpeed,float _delay)
-    {
-        restoreTimeSpeed = _restoreSpeed;
-        if(_delay > 0)
-        {
-            StopCoroutine(StartTimeAgain(_delay));
-            StartCoroutine(StartTimeAgain(_delay));
-        }
-        else
-        {
-            restoreTime = true;
-        }
-        Time.timeScale = _newTimeScale;
-    }
-    
-    IEnumerator StartTimeAgain(float _delay)
-    {
-        yield return new WaitForSecondsRealtime(_delay);
-        restoreTime = true;
-    }
 
-    public int Health
-    {
-        get { return (int)health; }
-        set
-        {
-            if (health != value)
-            {
-                health = Mathf.Clamp(value, 0, maxHealth);
-                
-                if(OnHealthChangedCallback != null)
-                {
-                    OnHealthChangedCallback.Invoke();
-                }
-            }
-        }
-    }
+    
+
+
     public bool Grounded()
     {
         if(Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) || 
@@ -350,10 +322,12 @@ public class playercontroller : MonoBehaviour
             Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
         {
             return true;
+            pstate.OnGround = true;
         }
         else
         {
             return false;
+            pstate.OnGround = false;
         }
     }
 
