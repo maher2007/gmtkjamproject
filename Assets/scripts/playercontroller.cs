@@ -422,7 +422,6 @@ public class playercontroller : MonoBehaviour
     {
         if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, Breakable))
         {
-            Debug.Log("3");
             return true;
         }
         else { return false; }
@@ -430,10 +429,9 @@ public class playercontroller : MonoBehaviour
 
     private void braking()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && Onbrakable())
+        if (Input.GetKeyDown(KeyCode.Q) && Onbrakable() && WillThisBreakObjects)
         {
             Break?.Invoke();
-            Debug.Log("2");
         }
 
 
