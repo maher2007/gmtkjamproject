@@ -10,5 +10,7 @@ public class killscript : MonoBehaviour
         {
             restartscreen.SetActive(true);
         }
+
+
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -42,6 +43,9 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private Transform WallCheck;
     [SerializeField] private float WallSlidingSpeed;
 
+    [Header("braking objets")]
+    [SerializeField] private LayerMask Breakable;
+    public static event Action Break;
     [Header("attacking settings")]
     bool attack = false;
     [SerializeField] private float timeBetweenAttack;
@@ -111,6 +115,7 @@ public class playercontroller : MonoBehaviour
         RestoreTimeScale();
         FlashWhileInvincible();
         WallSlide();
+        braking();
     }
     private void FixedUpdate()
     {
@@ -215,7 +220,6 @@ public class playercontroller : MonoBehaviour
         Gizmos.DrawWireCube(SideAttackTransfrom.position, SideAttackArea);
         Gizmos.DrawWireCube(UpAttackTransfrom.position, UpAttackArea);
         Gizmos.DrawWireCube(DownAttackTransfrom.position, DownAttackArea);
-        Gizmos.DrawWireCube(WallCheck.position, WallCheck.position);
     }
     void Recoil()
     {
@@ -354,6 +358,7 @@ public class playercontroller : MonoBehaviour
             }
             else if (!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump"))
             {
+                Debug.Log(whatIsGround);
                 pstate.jumping = true;
                 airJumpCounter++;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
@@ -413,6 +418,25 @@ public class playercontroller : MonoBehaviour
             pstate.WallSliding = false;
         }
     }
+    private bool Onbrakable()
+    {
+        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, Breakable))
+        {
+            Debug.Log("3");
+            return true;
+        }
+        else { return false; }
+    }
 
+    private void braking()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && Onbrakable())
+        {
+            Break?.Invoke();
+            Debug.Log("2");
+        }
+
+
+    }
     
 }
