@@ -8,10 +8,10 @@ public class playercontroller : MonoBehaviour
 {
     [Header("Horizontal movement Srttings")]
     private Rigidbody2D rb;
-    [SerializeField]private float walkSpeed = 1;
+    [SerializeField] private float walkSpeed = 1;
     private float xAsis, yAsis;
     [Header("virtecal movement srttings")]
-    [SerializeField]private float jumpForce = 45;
+    [SerializeField] private float jumpForce = 45;
     private float jumpBufferCounter = 0;
     [SerializeField] private float jumpBufferFrames;
     private float coyoteTimeCounter = 0;
@@ -19,7 +19,7 @@ public class playercontroller : MonoBehaviour
     private int airJumpCounter = 0;
     [SerializeField] private int maxAirJump;
     [Header("Ground Check Settings")]
-    
+
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundCheckY = 0.2f;
     [SerializeField] private float groundCheckX = 0.5f;
@@ -31,12 +31,17 @@ public class playercontroller : MonoBehaviour
     [SerializeField] GameObject dashEffect;
     Animator anim;
 
-    [HideInInspector]public playerstatelist pstate;
+    [HideInInspector] public playerstatelist pstate;
 
     public static playercontroller Instanece;
     private bool canDash = true;
     private bool dashed;
     private float gravity;
+
+    [Header("wall jump")]
+    [SerializeField] private Transform WallCheck;
+    [SerializeField] private float WallSlidingSpeed;
+
     [Header("attacking settings")]
     bool attack = false;
     [SerializeField] private float timeBetweenAttack;
@@ -62,9 +67,14 @@ public class playercontroller : MonoBehaviour
     public delegate void OnHealthChangedDelegate();
     public OnHealthChangedDelegate OnHealthChangedCallback;
     [SerializeField] GameObject Bloodspurt;
+
+    [Header("player settings")]
+    [SerializeField] private bool WillThisDash;
+    [SerializeField] private bool WillThiswalljump;
+    [SerializeField] protected bool WillThisBreakObjects;
     private void Awake()
     {
-        if (Instanece != null && Instanece != this) 
+        if (Instanece != null && Instanece != this)
         {
             Destroy(gameObject);
         }
@@ -100,10 +110,11 @@ public class playercontroller : MonoBehaviour
         Attack();
         RestoreTimeScale();
         FlashWhileInvincible();
+        WallSlide();
     }
     private void FixedUpdate()
     {
-        if( pstate.Dashing) return ;
+        if (pstate.Dashing) return;
         Recoil();
     }
     void GetInput()
@@ -119,7 +130,7 @@ public class playercontroller : MonoBehaviour
             transform.localScale = new Vector2(-1, transform.localScale.y);
             pstate.lookingRight = false;
         }
-        else if (xAsis > 0) 
+        else if (xAsis > 0)
         {
             transform.localScale = new Vector2(1, transform.localScale.y);
             pstate.lookingRight = true;
@@ -127,18 +138,19 @@ public class playercontroller : MonoBehaviour
     }
     private void Move()
     {
-        rb.linearVelocity = new Vector2 (walkSpeed * xAsis, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(walkSpeed * xAsis, rb.linearVelocity.y);
         anim.SetBool("Walking", rb.linearVelocity.x != 0 && Grounded());
         pstate.walking = (Grounded() && xAsis != 0 && !pstate.Dashing && !pstate.recoilingX && !pstate.recoilingY);
     }
     void StratDash()
     {
-        if (Input.GetButtonDown("Dash") && canDash && !dashed)
+        if (Walled()) StopCoroutine(Dash());
+        if (Input.GetButtonDown("Dash") && canDash && !dashed && WillThisDash)
         {
             StartCoroutine(Dash());
             dashed = true;
         }
-        if(Grounded()) 
+        if (Grounded())
         {
             dashed = false;
         }
@@ -150,7 +162,7 @@ public class playercontroller : MonoBehaviour
         pstate.Dashing = true;
         anim.SetTrigger("Dashing");
         rb.gravityScale = 0;
-        rb.linearVelocity = new Vector2(transform.localScale.x * dashSpeed, 0);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x * dashSpeed, 0);
         if (Grounded()) Instantiate(dashEffect, transform);
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = gravity;
@@ -161,7 +173,7 @@ public class playercontroller : MonoBehaviour
     void Attack()
     {
         timeSinceAttack += Time.deltaTime;
-        if(attack && timeSinceAttack >= timeBetweenAttack)
+        if (attack && timeSinceAttack >= timeBetweenAttack)
         {
             timeSinceAttack = 0;
             anim.SetTrigger("Attacking");
@@ -173,7 +185,7 @@ public class playercontroller : MonoBehaviour
             {
                 Hit(UpAttackTransfrom, UpAttackArea, ref pstate.recoilingY, recoilYSpeed);
             }
-            else if(yAsis < 0 && !Grounded())
+            else if (yAsis < 0 && !Grounded())
             {
                 Hit(DownAttackTransfrom, DownAttackArea, ref pstate.recoilingY, recoilYSpeed);
             }
@@ -183,7 +195,7 @@ public class playercontroller : MonoBehaviour
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
         List<Enemy> hitenemies = new List<Enemy>();
-        if(objectsToHit.Length > 0)
+        if (objectsToHit.Length > 0)
         {
             _recoilDir = true;
         }
@@ -203,6 +215,7 @@ public class playercontroller : MonoBehaviour
         Gizmos.DrawWireCube(SideAttackTransfrom.position, SideAttackArea);
         Gizmos.DrawWireCube(UpAttackTransfrom.position, UpAttackArea);
         Gizmos.DrawWireCube(DownAttackTransfrom.position, DownAttackArea);
+        Gizmos.DrawWireCube(WallCheck.position, WallCheck.position);
     }
     void Recoil()
     {
@@ -218,12 +231,12 @@ public class playercontroller : MonoBehaviour
             }
         }
 
-        if(pstate.recoilingY)
+        if (pstate.recoilingY)
         {
-            rb.gravityScale = 0;
-            if(yAsis < 0)
+
+            if (yAsis < 0)
             {
-                
+
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, recoilYSpeed);
             }
             else
@@ -255,10 +268,10 @@ public class playercontroller : MonoBehaviour
         }
         if (Grounded())
         {
-            StopRecoilY(); 
+            StopRecoilY();
         }
     }
-    
+
     void StopRecoilX()
     {
         stepsXRecoiled = 0;
@@ -294,7 +307,7 @@ public class playercontroller : MonoBehaviour
     {
         if (restoreTime)
         {
-            if(Time.timeScale < 1)
+            if (Time.timeScale < 1)
             {
                 Time.timeScale += Time.unscaledDeltaTime * restoreTimeSpeed;
             }
@@ -306,12 +319,12 @@ public class playercontroller : MonoBehaviour
         }
     }
 
-    
+
 
 
     public bool Grounded()
     {
-        if(Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) || 
+        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) ||
             Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround) ||
             Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
         {
@@ -334,19 +347,19 @@ public class playercontroller : MonoBehaviour
         }
         if (!pstate.jumping)
         {
-         if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
-                {
-                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
-                    pstate.jumping = true;
-                }
-         else if(!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump") )
+            if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+                pstate.jumping = true;
+            }
+            else if (!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump"))
             {
                 pstate.jumping = true;
                 airJumpCounter++;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
             }
         }
-       
+
         anim.SetBool("Jumping", !Grounded());
     }
 
@@ -371,4 +384,35 @@ public class playercontroller : MonoBehaviour
             jumpBufferCounter = jumpBufferCounter - Time.deltaTime;
         }
     }
+
+    private bool Walled()
+    {
+        if (
+            Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.right, groundCheckX, whatIsGround) ||
+            Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.left, groundCheckX, whatIsGround))
+        { return true; }
+        else
+        { return false; }
+
+    }
+
+    private void WallSlide()
+    {
+        if (Walled() && !Grounded() && WillThiswalljump)
+        {
+            pstate.WallSliding = true;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -WallSlidingSpeed, float.MaxValue));
+            if (Input.GetButtonDown("Jump") ) 
+            { 
+                rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2), rb.linearVelocity.y);
+                airJumpCounter--;
+            }
+        }
+        else
+        {
+            pstate.WallSliding = false;
+        }
+    }
+
+    
 }
