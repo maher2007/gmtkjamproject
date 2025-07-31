@@ -20,6 +20,7 @@ public class audiomaneger : MonoBehaviour
         else { Destroy(gameObject); }
         soundplayer = gameObject.AddComponent<AudioSource>();
         musicplayer = gameObject.AddComponent<AudioSource>();
+      
 
     }
 
