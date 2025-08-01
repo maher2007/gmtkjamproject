@@ -3,7 +3,8 @@ using UnityEngine;
 public class fadescript : MonoBehaviour
 {
     [SerializeField] GameObject GameObject;
-    
+    [SerializeField] string toscene;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,7 +20,7 @@ public class fadescript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == GameObject)
+        if (collision.gameObject.CompareTag("player"))
         {
             fade();
         }
@@ -32,12 +33,12 @@ public class fadescript : MonoBehaviour
 
         if (fade != null)
         {
-            fade.FadeToScene(sceneName: "1");
+            fade.FadeToScene(sceneName: toscene);
         }
         else
         {
             // Fallback if fade manager not found
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(toscene);
         }
     }
 }
