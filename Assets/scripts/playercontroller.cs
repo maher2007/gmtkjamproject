@@ -407,7 +407,7 @@ public class playercontroller : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -WallSlidingSpeed, float.MaxValue));
             if (Input.GetButtonDown("Jump") ) 
             { 
-                rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2), rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -5), rb.linearVelocity.y);
                 airJumpCounter--;
             }
         }
