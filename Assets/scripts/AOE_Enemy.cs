@@ -46,7 +46,6 @@ public class AOE_Enemy : MonoBehaviour
             yield return new WaitForSeconds(interval);
             // Activate AOE
             aoeZone.SetActive(true);
-            ApplyDamageInZone(); // immediate application when it appears (optional: could delay slightly)
             aoe_StateList.IsWaitingForAttack = false;
             aoe_StateList.IsAttacking = true;
             yield return new WaitForSeconds(activeDuration);
@@ -54,53 +53,8 @@ public class AOE_Enemy : MonoBehaviour
         }
     }
 
-    private void ApplyDamageInZone()
-    {
-        Collider2D col = aoeZone.GetComponent<Collider2D>();
-        if (col == null) return;
 
-        // Use OverlapCollider to get current overlaps without allocating GC
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.NoFilter(); // can customize to layers if needed
-
-        int count = aoeZone.GetComponent<Collider2D>().Overlap(filter, hitsBuffer);
-        for (int i = 0; i < count; i++)
-        {
-            Collider2D hit = hitsBuffer[i];
-            if (hit != null && hit.CompareTag(targetTag))
-            {
-                // Try to damage
-                playercontroller dmg = hit.GetComponent<playercontroller>();
-                if (dmg != null)
-                {
-                    dmg.TakeDamge(damage);
-                }
-                else
-                {
-                    // fallback: send message (optional)
-                    hit.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
-                }
-            }
-        }
-    }
 
     // (Optional) Visual debug
-    private void OnDrawGizmosSelected()
-    {
-        if (aoeZone != null)
-        {
-            Collider2D c = aoeZone.GetComponent<Collider2D>();
-            if (c is CircleCollider2D circle)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(circle.transform.position + (Vector3)circle.offset, circle.radius * circle.transform.lossyScale.x);
-            }
-            else if (c is BoxCollider2D box)
-            {
-                Gizmos.color = Color.red;
-                Vector3 size = new Vector3(box.size.x * box.transform.lossyScale.x, box.size.y * box.transform.lossyScale.y, 1);
-                Gizmos.DrawWireCube(box.transform.position + (Vector3)box.offset, size);
-            }
-        }
-    }
+
 }

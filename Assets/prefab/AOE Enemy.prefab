@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 340385176922443885}
   - component: {fileID: 4910791290852141773}
   - component: {fileID: 6300912144272110221}
+  - component: {fileID: 5181736622950210982}
   m_Layer: 0
   m_Name: HitZone
   m_TagString: Untagged
@@ -124,6 +125,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &5181736622950210982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063117530043851145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5590ea9757c9d444084b71d0a9f0f74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8492574519420453589
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 10
-  activeDuration: 0.5
+  activeDuration: 1
   damage: 25
   targetTag: Player
   aoeZone: {fileID: 2063117530043851145}
