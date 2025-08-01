@@ -12,6 +12,9 @@ public class AOE_Enemy : MonoBehaviour
     [Tooltip("Child object with a Trigger Collider2D used as the AOE zone.")]
     public GameObject aoeZone;
 
+    [Header("State List")]
+    [SerializeField] AOE_EnemyStateList aoe_StateList;
+
     private Collider2D[] hitsBuffer = new Collider2D[10]; // small buffer to avoid allocations
 
     private void Start()
@@ -38,10 +41,14 @@ public class AOE_Enemy : MonoBehaviour
     {
         while (true)
         {
+            aoe_StateList.IsWaitingForAttack = true;
+            aoe_StateList.IsAttacking = false;
             yield return new WaitForSeconds(interval);
             // Activate AOE
             aoeZone.SetActive(true);
             ApplyDamageInZone(); // immediate application when it appears (optional: could delay slightly)
+            aoe_StateList.IsWaitingForAttack = false;
+            aoe_StateList.IsAttacking = true;
             yield return new WaitForSeconds(activeDuration);
             aoeZone.SetActive(false);
         }

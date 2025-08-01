@@ -375,6 +375,9 @@ MonoBehaviour:
   pstate: {fileID: 0}
   WallCheck: {fileID: 771281985}
   WallSlidingSpeed: 5
+  Breakable:
+    serializedVersion: 2
+    m_Bits: 0
   timeBetweenAttack: 0.5
   SideAttackTransfrom: {fileID: 2115268969}
   UpAttackTransfrom: {fileID: 567896450}
@@ -690,6 +693,7 @@ GameObject:
   - component: {fileID: 1763929521}
   - component: {fileID: 1763929520}
   - component: {fileID: 1763929519}
+  - component: {fileID: 1763929522}
   m_Layer: 0
   m_Name: AOE Enemy
   m_TagString: Untagged
@@ -714,6 +718,7 @@ MonoBehaviour:
   damage: 25
   targetTag: Player
   aoeZone: {fileID: 57304956}
+  aoe_StateList: {fileID: 1763929522}
 --- !u!212 &1763929520
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -785,6 +790,20 @@ Transform:
   - {fileID: 57304958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763929522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763929518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e0a56aa96f7034d81047b7aae250a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsWaitingForAttack: 0
+  IsAttacking: 0
 --- !u!1 &1767517706
 GameObject:
   m_ObjectHideFlags: 0
