@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-public class PatrolEnemy : MonoBehaviour
+public class PatrolEnemy : Enemy
 {
     [Header("Patrol Points")]
     [Tooltip("First point (A) world position.")]

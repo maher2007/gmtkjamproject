@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-public class AOE_Enemy : MonoBehaviour
+public class AOE_Enemy : Enemy
 {
     [Header("AOE Settings")]
     public float interval = 10f;          // time between pulses
