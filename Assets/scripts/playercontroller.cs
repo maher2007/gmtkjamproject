@@ -57,6 +57,10 @@ public class playercontroller : MonoBehaviour
     bool restoreTime;
     float restoreTimeSpeed;
 
+    [Header("lastposition")]
+    [SerializeField] GameObject lastposition;
+    [SerializeField] GameObject kill;
+    [SerializeField] killscript killscript;
     [Header("Recoil")]
     [SerializeField] int recoilXSteps = 5;
     [SerializeField] int recoilYsteps = 5;
@@ -78,6 +82,8 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private bool WillThisDash;
     [SerializeField] private bool WillThiswalljump;
     [SerializeField] protected bool WillThisBreakObjects;
+
+    private void OnEnable() => killscript.Playerreset += PleyerPostionReset;
     private void Awake()
     {
         if (Instanece != null && Instanece != this)
@@ -119,6 +125,7 @@ public class playercontroller : MonoBehaviour
         WallSlide();
         braking();
         checkifdead();
+        MoveLastPoistion();
     }
     private void FixedUpdate()
     {
@@ -358,9 +365,16 @@ public class playercontroller : MonoBehaviour
             }
             else if (!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump"))
             {
+                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+                if (Walled())
+                {
+                    rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2f), rb.linearVelocity.y);
+                    airJumpCounter--;
+                }
                 pstate.jumping = true;
                 airJumpCounter++;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+               
             }
         }
         anim.SetBool("Jumping", !Grounded());
@@ -405,11 +419,7 @@ public class playercontroller : MonoBehaviour
         {
             pstate.WallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -WallSlidingSpeed, float.MaxValue));
-            if (Input.GetButtonDown("Jump") ) 
-            { 
-                rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2f), rb.linearVelocity.y);
-                airJumpCounter--;
-            }
+            airJumpCounter--;
         }
         else
         {
@@ -439,5 +449,19 @@ public class playercontroller : MonoBehaviour
             restartscreen.SetActive(true);
         }
 
+    }
+
+    private void MoveLastPoistion()
+    {
+        if (Grounded())
+        {
+            lastposition.transform.position = gameObject.transform.position;
+        }
+    }
+
+    private void PleyerPostionReset()
+    {
+        if (gameObject.transform.position == lastposition.transform.position) this.gameObject.transform.position += new Vector3(1, 1, 0);
+        else this.gameObject.transform.position = lastposition.transform.position ;
     }
 }

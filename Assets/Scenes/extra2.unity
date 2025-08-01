@@ -3229,8 +3229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceddcf1f9fe77dd41b1add48e90b2c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameObject: {fileID: 0}
-  controller: {fileID: 0}
+  GameObject: {fileID: 1602807518}
+  controller: {fileID: 1602807523}
   blockdurablity: 4
 --- !u!212 &975451682
 SpriteRenderer:
@@ -8372,8 +8372,16 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
+      propertyPath: Breakable.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: jumpBufferFrames
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 136
       objectReference: {fileID: 0}
     - target: {fileID: 8383060708690043687, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: m_Name

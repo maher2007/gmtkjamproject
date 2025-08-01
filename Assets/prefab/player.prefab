@@ -355,6 +355,9 @@ MonoBehaviour:
   pstate: {fileID: 0}
   WallCheck: {fileID: 6205854683172573663}
   WallSlidingSpeed: 5
+  Breakable:
+    serializedVersion: 2
+    m_Bits: 0
   timeBetweenAttack: 0.5
   SideAttackTransfrom: {fileID: 8663310511979726020}
   UpAttackTransfrom: {fileID: 3404470684107013771}
@@ -366,6 +369,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   damage: 2
+  lastposition: {fileID: 0}
   recoilXSteps: 5
   recoilYsteps: 5
   recoilXSpeed: 50
@@ -374,6 +378,7 @@ MonoBehaviour:
   maxHealth: 20
   HitFlashSpeed: 0
   Bloodspurt: {fileID: 6390943552641158193, guid: 348ab2b9885480e49b6092efd3d42d54, type: 3}
+  restartscreen: {fileID: 0}
   WillThisDash: 1
   WillThiswalljump: 1
   WillThisBreakObjects: 1
