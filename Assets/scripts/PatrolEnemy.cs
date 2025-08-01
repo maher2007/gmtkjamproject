@@ -9,26 +9,26 @@ public class PatrolEnemy : Enemy
     public Transform pointB;
 
     [Header("Movement")]
-    public float speed = 2f;
+    public float speedr = 2f;
     public float waitTimeAtPoint = 0.5f;
 
     // State flags
     public bool movingToB = true;
     public bool isWaiting = false;
 
-    private void Start()
-    {
-        if (pointA == null || pointB == null)
-        {
-            Debug.LogWarning("SimplePatrol2D: Assign both pointA and pointB.", this);
-            enabled = false;
-            return;
-        }
+   // private void Start()
+    //{
+      //  if (pointA == null || pointB == null)
+        //{
+          //  Debug.LogWarning("SimplePatrol2D: Assign both pointA and pointB.", this);
+            //enabled = false;
+           // return;
+       // }
 
         // Start at point A
-        transform.position = pointA.position;
-        StartCoroutine(PatrolLoop());
-    }
+        //transform.position = pointA.position;
+       // StartCoroutine(PatrolLoop());
+    //}
 
     private IEnumerator PatrolLoop()
     {
@@ -45,7 +45,7 @@ public class PatrolEnemy : Enemy
             // Move toward target
             while ((transform.position - target).sqrMagnitude > 0.001f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, target, speedr * Time.deltaTime);
                 yield return null;
             }
 

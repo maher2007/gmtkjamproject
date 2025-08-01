@@ -5,7 +5,7 @@ public class AOE_Enemy : Enemy
     [Header("AOE Settings")]
     public float interval = 10f;          // time between pulses
     public float activeDuration = 0.5f;   // how long the AOE is active
-    public float damage = 25f;            // damage dealt per pulse
+    public float damager = 25f;            // damage dealt per pulse
     public string targetTag = "Player";    // tag to identify valid targets
 
     [Header("References")]
