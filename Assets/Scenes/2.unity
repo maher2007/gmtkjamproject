@@ -20738,6 +20738,10 @@ PrefabInstance:
       propertyPath: health
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
+      propertyPath: restartscreen
+      value: 
+      objectReference: {fileID: 1207910271}
     - target: {fileID: 8383060708690043687, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: m_Name
       value: player

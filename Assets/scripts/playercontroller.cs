@@ -71,6 +71,8 @@ public class playercontroller : MonoBehaviour
     public delegate void OnHealthChangedDelegate();
     public OnHealthChangedDelegate OnHealthChangedCallback;
     [SerializeField] GameObject Bloodspurt;
+    [SerializeField] private GameObject restartscreen;
+
 
     [Header("player settings")]
     [SerializeField] private bool WillThisDash;
@@ -116,6 +118,7 @@ public class playercontroller : MonoBehaviour
         FlashWhileInvincible();
         WallSlide();
         braking();
+        checkifdead();
     }
     private void FixedUpdate()
     {
@@ -428,5 +431,13 @@ public class playercontroller : MonoBehaviour
         {
             Break?.Invoke();
         }
+    }
+    private void checkifdead()
+    {
+        if (health <= 0)
+        {
+            restartscreen.SetActive(true);
+        }
+
     }
 }
