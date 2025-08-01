@@ -333,12 +333,10 @@ public class playercontroller : MonoBehaviour
             Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
         {
             return true;
-            pstate.OnGround = true;
         }
         else
         {
             return false;
-            pstate.OnGround = false;
         }
     }
 
