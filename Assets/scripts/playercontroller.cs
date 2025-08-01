@@ -328,9 +328,7 @@ public class playercontroller : MonoBehaviour
 
     public bool Grounded()
     {
-        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) ||
-            Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround) ||
-            Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
+        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, whatIsGround) || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround) || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
         {
             return true;
         }
@@ -353,16 +351,15 @@ public class playercontroller : MonoBehaviour
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 pstate.jumping = true;
+                
             }
             else if (!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump"))
             {
-                Debug.Log(whatIsGround);
                 pstate.jumping = true;
                 airJumpCounter++;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
             }
         }
-
         anim.SetBool("Jumping", !Grounded());
     }
 
@@ -390,10 +387,10 @@ public class playercontroller : MonoBehaviour
 
     private bool Walled()
     {
-        if (
-            Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.right, groundCheckX, whatIsGround) ||
-            Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.left, groundCheckX, whatIsGround))
-        { return true; }
+        if (Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.right, groundCheckX, whatIsGround) || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.left, groundCheckX, whatIsGround))
+        { 
+            return true;
+        }
         else
         { return false; }
 
@@ -407,7 +404,7 @@ public class playercontroller : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -WallSlidingSpeed, float.MaxValue));
             if (Input.GetButtonDown("Jump") ) 
             { 
-                rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -5), rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2f), rb.linearVelocity.y);
                 airJumpCounter--;
             }
         }
@@ -431,8 +428,5 @@ public class playercontroller : MonoBehaviour
         {
             Break?.Invoke();
         }
-
-
     }
-    
 }
