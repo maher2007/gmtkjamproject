@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: player Variant 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7920521798050147615, guid: 59a81a71ec975444091571f9da5464fa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3678014621849222610, guid: e3c3f350f8c78eb478fb4baac6f3f8c4, type: 3}
+    - target: {fileID: 8268375884684501186, guid: 59a81a71ec975444091571f9da5464fa, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7bb18108d4c51654e8dcfe81128a7d4d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

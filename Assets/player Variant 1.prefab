@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 253428298647210563, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.51
+      value: 0.498
       objectReference: {fileID: 0}
     - target: {fileID: 253428298647210563, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.68
+      value: 2.674
       objectReference: {fileID: 0}
     - target: {fileID: 253428298647210563, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -48,12 +48,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1697379692994988652, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 81c6477f04bb2fb40bf30c22593279a0, type: 2}
+    - target: {fileID: 3425003262865815871, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: sr
+      value: 
+      objectReference: {fileID: 7920521798050147615}
+    - target: {fileID: 6094080620498231805, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094080620498231805, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094080620498231805, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114385152921116593, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1480709714917458963, guid: fd7a8ebb763d50047bba8ce95fde067e, type: 3}
     - target: {fileID: 7902679371120788410, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
       propertyPath: m_Name
       value: player Variant 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8989041946412364304, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: recoilingX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074519092898026092, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 81c6477f04bb2fb40bf30c22593279a0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+--- !u!212 &7920521798050147615 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7114385152921116593, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+  m_PrefabInstance: {fileID: 1103389631252624046}
+  m_PrefabAsset: {fileID: 0}
