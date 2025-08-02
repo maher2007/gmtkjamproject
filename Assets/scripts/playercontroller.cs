@@ -76,6 +76,7 @@ public class playercontroller : MonoBehaviour
     public OnHealthChangedDelegate OnHealthChangedCallback;
     [SerializeField] GameObject Bloodspurt;
     [SerializeField] private GameObject restartscreen;
+    [SerializeField]healScript healscript;
 
 
     [Header("player settings")]
@@ -83,7 +84,10 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private bool WillThiswalljump;
     [SerializeField] protected bool WillThisBreakObjects;
 
-    private void OnEnable() => killscript.Playerreset += PleyerPostionReset;
+    private void OnEnable() 
+    {
+        killscript.Playerreset += PleyerPostionReset;
+    }
     private void Awake()
     {
         if (Instanece != null && Instanece != this)
@@ -463,5 +467,10 @@ public class playercontroller : MonoBehaviour
     {
         if (gameObject.transform.position == lastposition.transform.position) this.gameObject.transform.position += new Vector3(1, 1, 0);
         else this.gameObject.transform.position = lastposition.transform.position ;
+    }
+    public void healnow()
+    {
+        health = 20;
+        Debug.Log(1);
     }
 }

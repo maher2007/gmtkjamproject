@@ -369,7 +369,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   damage: 2
-  lastposition: {fileID: 0}
+  lastposition: {fileID: 1925262418345240317, guid: 0c81de2d64db29f4fb25d1d36ec33e23, type: 3}
+  kill: {fileID: 7731010157603787934, guid: 1abd89133f927da4b894bc99ca7a501a, type: 3}
+  killscript: {fileID: 8868521405904803690, guid: 1abd89133f927da4b894bc99ca7a501a, type: 3}
   recoilXSteps: 5
   recoilYsteps: 5
   recoilXSpeed: 50
@@ -379,6 +381,7 @@ MonoBehaviour:
   HitFlashSpeed: 0
   Bloodspurt: {fileID: 6390943552641158193, guid: 348ab2b9885480e49b6092efd3d42d54, type: 3}
   restartscreen: {fileID: 0}
+  healscript: {fileID: 0}
   WillThisDash: 1
   WillThiswalljump: 1
   WillThisBreakObjects: 1
