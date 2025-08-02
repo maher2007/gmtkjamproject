@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6335926474302255717}
   - component: {fileID: 5078809676946925460}
   m_Layer: 6
-  m_Name: Circle
+  m_Name: flying enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
