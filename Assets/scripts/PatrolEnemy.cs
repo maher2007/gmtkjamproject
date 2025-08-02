@@ -7,6 +7,7 @@ public class PatrolEnemy : Enemy
     public Transform pointA;
     [Tooltip("Second point (B) world position.")]
     public Transform pointB;
+    SpriteRenderer spriteRenderer;
 
     [Header("Movement")]
     public float speedr = 2f;
@@ -25,10 +26,19 @@ public class PatrolEnemy : Enemy
             enabled = false;
             return;
         }
-
         // Start at point A
+        spriteRenderer = GetComponent<SpriteRenderer>();
         transform.position = pointA.position;
         StartCoroutine(PatrolLoop());
+    }
+    new void Update()
+    {
+        base.Update();
+        if (transform.position.x >= 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else { spriteRenderer.flipX = true; }
     }
 
     private IEnumerator PatrolLoop()

@@ -32,7 +32,7 @@ public class AOEPatrolEnemy : MonoBehaviour
         StartCoroutine(PatrolLoop());
     }
 
-    new void Update()
+   void Update()
     {
         if (transform.position.x >= 0)
         {
