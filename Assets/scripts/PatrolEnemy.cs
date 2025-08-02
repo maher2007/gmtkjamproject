@@ -16,8 +16,9 @@ public class PatrolEnemy : Enemy
     public bool movingToB = true;
     public bool isWaiting = false;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         if (pointA == null || pointB == null)
         {
             Debug.LogWarning("SimplePatrol2D: Assign both pointA and pointB.", this);
@@ -50,17 +51,11 @@ public class PatrolEnemy : Enemy
             }
 
             // Arrived: flip direction after waiting
-            yield return StartCoroutine(WaitRoutine());
             movingToB = !movingToB;
         }
     }
 
-    private IEnumerator WaitRoutine()
-    {
-        isWaiting = true;
-        yield return new WaitForSeconds(waitTimeAtPoint);
-        isWaiting = false;
-    }
+
 
     // Optional: visualize patrol in editor
     private void OnDrawGizmos()

@@ -15,6 +15,7 @@ public class AOEPatrolEnemy : MonoBehaviour
     // State flags
     public bool movingToB = true;
     public bool isWaiting = false;
+    SpriteRenderer spriteRenderer;
 
     private void Start()
     {
@@ -27,9 +28,18 @@ public class AOEPatrolEnemy : MonoBehaviour
 
         // Start at point A
         transform.position = pointA.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(PatrolLoop());
     }
 
+    new void Update()
+    {
+        if (transform.position.x >= 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else { spriteRenderer.flipX = true; }
+    }
 
     private IEnumerator PatrolLoop()
     {
@@ -50,18 +60,12 @@ public class AOEPatrolEnemy : MonoBehaviour
                     yield return null;
                 }
                 // Arrived: flip direction after waiting
-                yield return StartCoroutine(WaitRoutine());
                 movingToB = !movingToB;
             }
         }
     }
 
-    private IEnumerator WaitRoutine()
-    {
-        isWaiting = true;
-        yield return new WaitForSeconds(waitTimeAtPoint);
-        isWaiting = false;
-    }
+
 
     // Optional: visualize patrol in editor
     private void OnDrawGizmos()
