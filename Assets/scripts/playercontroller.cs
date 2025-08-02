@@ -126,7 +126,7 @@ public class playercontroller : MonoBehaviour
         RestoreTimeScale();
         FlashWhileInvincible();
         checkifdead();
-        MoveLastPoistion();
+        
     }
     private void FixedUpdate()
     {
@@ -134,6 +134,7 @@ public class playercontroller : MonoBehaviour
         Recoil();
         WallSlide();
         braking();
+        MoveLastPoistion();
     }
     void GetInput()
     {
