@@ -125,7 +125,6 @@ public class playercontroller : MonoBehaviour
         Attack();
         RestoreTimeScale();
         FlashWhileInvincible();
-        WallSlide();
         braking();
         checkifdead();
         MoveLastPoistion();
@@ -134,6 +133,7 @@ public class playercontroller : MonoBehaviour
     {
         if (pstate.Dashing) return;
         Recoil();
+        WallSlide();
     }
     void GetInput()
     {
@@ -357,6 +357,7 @@ public class playercontroller : MonoBehaviour
 
     private void jump()
     {
+        
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0)
         {
             rb.linearVelocity = new Vector2(x: rb.linearVelocity.x, y: 0);
@@ -368,19 +369,6 @@ public class playercontroller : MonoBehaviour
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 pstate.jumping = true;
-                
-            }
-            else if (!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump"))
-            {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
-                if (Walled())
-                {
-                    rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2f), rb.linearVelocity.y);
-                    airJumpCounter--;
-                }
-                pstate.jumping = true;
-                airJumpCounter++;
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 
             }
         }
@@ -411,13 +399,12 @@ public class playercontroller : MonoBehaviour
 
     private bool Walled()
     {
-        if (Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.right, groundCheckX, whatIsGround) || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.left, groundCheckX, whatIsGround))
+        if (Physics2D.Raycast(WallCheck.position, Vector2.right, groundCheckX, whatIsGround) || Physics2D.Raycast(WallCheck.position, Vector2.left, groundCheckX, whatIsGround))
         {
             return true;
         }
         else
         { return false; }
-
     }
 
     private void WallSlide()
@@ -426,7 +413,18 @@ public class playercontroller : MonoBehaviour
         {
             pstate.WallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -WallSlidingSpeed, float.MaxValue));
-            airJumpCounter--;
+            if(Input.GetButtonDown("Jump"))
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+                if (Walled())
+                {
+                    rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2f), rb.linearVelocity.y);
+                    airJumpCounter--;
+                }
+                pstate.jumping = true;
+                airJumpCounter++;
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+            }
         }
         else
         {
