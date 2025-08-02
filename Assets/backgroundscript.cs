@@ -1,27 +1,30 @@
 using UnityEngine;
 
-public class ParallaxBackground : MonoBehaviour
+public class InfiniteParallax : MonoBehaviour
 {
-    [SerializeField] private float parallaxSpeed;
-    private float length;
-    private float startPos;
-    private Transform cam;
-
-    void Start()
+    private float startpos;
+    private float lengthofsprite;
+    public float amountofparallox;
+    public Camera maincamire;
+    private void Start()
     {
-        startPos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
-        cam = Camera.main.transform;
+        startpos = transform.position.x;
+        lengthofsprite = GetComponent<SpriteRenderer>().bounds.size.x;
     }
-
-    void Update()
+    private void Update()
     {
-        float temp = cam.position.x * (1 - parallaxSpeed);
-        float distance = cam.position.x * parallaxSpeed;
-        transform.position = new Vector3(startPos + distance, transform.position.y, transform.position.z);
-
-        // Infinite scrolling (optional)
-        if (temp > startPos + length) startPos += length;
-        else if (temp < startPos - length) startPos -= length;
+        Vector3 Position = maincamire.transform.position;
+        float temp = Position.x * (1 - amountofparallox);
+        float destance = Position.x * amountofparallox;
+        Vector3 newpos = new Vector3(startpos + destance, maincamire.transform.position.y, transform.position.z);
+        transform.position = newpos;
+        if (temp > startpos + (lengthofsprite / 2))
+        {
+            startpos += lengthofsprite;
+        }
+        else if (temp < startpos - (lengthofsprite / 2))
+        {
+            startpos -= lengthofsprite;
+        }
     }
 }
