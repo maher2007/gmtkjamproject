@@ -16,19 +16,19 @@ public class PatrolEnemy : Enemy
     public bool movingToB = true;
     public bool isWaiting = false;
 
-   // private void Start()
-    //{
-      //  if (pointA == null || pointB == null)
-        //{
-          //  Debug.LogWarning("SimplePatrol2D: Assign both pointA and pointB.", this);
-            //enabled = false;
-           // return;
-       // }
+    private void Start()
+    {
+        if (pointA == null || pointB == null)
+        {
+            Debug.LogWarning("SimplePatrol2D: Assign both pointA and pointB.", this);
+            enabled = false;
+            return;
+        }
 
         // Start at point A
-        //transform.position = pointA.position;
-       // StartCoroutine(PatrolLoop());
-    //}
+        transform.position = pointA.position;
+        StartCoroutine(PatrolLoop());
+    }
 
     private IEnumerator PatrolLoop()
     {
