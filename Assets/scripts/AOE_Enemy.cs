@@ -17,7 +17,7 @@ public class AOE_Enemy : Enemy
 
     private Collider2D[] hitsBuffer = new Collider2D[10]; // small buffer to avoid allocations
 
-    private void Start()
+    private new void Start()
     {
         if (aoeZone == null)
         {
@@ -34,10 +34,10 @@ public class AOE_Enemy : Enemy
         }
 
         aoeZone.SetActive(false);
-       
+       base.Start();
     }
 
-    private void Update()
+    private new void Update()
     {
         base.Update();
         if (aoeZone == null) Destroy(gameObject);

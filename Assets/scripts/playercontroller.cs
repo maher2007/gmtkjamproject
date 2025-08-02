@@ -30,7 +30,7 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
     [SerializeField] GameObject dashEffect;
-    Animator anim;
+    [SerializeField]Animator anim;
 
     [HideInInspector] public playerstatelist pstate;
 
@@ -38,6 +38,7 @@ public class playercontroller : MonoBehaviour
     private bool canDash = true;
     private bool dashed;
     private float gravity;
+    
 
     [Header("wall jump")]
     [SerializeField] private Transform WallCheck;
@@ -71,12 +72,12 @@ public class playercontroller : MonoBehaviour
     public float health;
     public float maxHealth;
     [SerializeField] float HitFlashSpeed;
-    private SpriteRenderer sr;
+    [SerializeField]private SpriteRenderer sr;
     public delegate void OnHealthChangedDelegate();
     public OnHealthChangedDelegate OnHealthChangedCallback;
     [SerializeField] GameObject Bloodspurt;
     [SerializeField] private GameObject restartscreen;
-    [SerializeField]healScript healscript;
+    [SerializeField] healScript healscript;
 
 
     [Header("player settings")]
@@ -84,7 +85,7 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private bool WillThiswalljump;
     [SerializeField] protected bool WillThisBreakObjects;
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         killscript.Playerreset += PleyerPostionReset;
     }
@@ -105,8 +106,6 @@ public class playercontroller : MonoBehaviour
         pstate = GetComponent<playerstatelist>();
 
         rb = GetComponent<Rigidbody2D>();
-
-        anim = GetComponent<Animator>();
 
         gravity = rb.gravityScale;
 
@@ -154,11 +153,12 @@ public class playercontroller : MonoBehaviour
             transform.localScale = new Vector2(1, transform.localScale.y);
             pstate.lookingRight = true;
         }
+        anim.SetBool("idle",rb.linearVelocity == Vector2.zero);
     }
     private void Move()
     {
         rb.linearVelocity = new Vector2(walkSpeed * xAsis, rb.linearVelocity.y);
-        anim.SetBool("Walking", rb.linearVelocity.x != 0 && Grounded());
+        anim.SetBool("walk", pstate.walking);
         pstate.walking = (Grounded() && xAsis != 0 && !pstate.Dashing && !pstate.recoilingX && !pstate.recoilingY);
     }
     void StratDash()
@@ -179,7 +179,7 @@ public class playercontroller : MonoBehaviour
     {
         canDash = false;
         pstate.Dashing = true;
-        anim.SetTrigger("Dashing");
+        anim.SetTrigger("dash");
         rb.gravityScale = 0;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x * dashSpeed, 0);
         if (Grounded()) Instantiate(dashEffect, transform);
@@ -195,18 +195,21 @@ public class playercontroller : MonoBehaviour
         if (attack && timeSinceAttack >= timeBetweenAttack)
         {
             timeSinceAttack = 0;
-            anim.SetTrigger("Attacking");
+            
             if (yAsis == 0 || yAsis < 0 && Grounded())
             {
                 Hit(SideAttackTransfrom, SideAttackArea, ref pstate.recoilingX, recoilXSpeed);
+                anim.SetTrigger("attack");
             }
             else if (yAsis > 0)
             {
                 Hit(UpAttackTransfrom, UpAttackArea, ref pstate.recoilingY, recoilYSpeed);
+                anim.SetTrigger("upattack");
             }
             else if (yAsis < 0 && !Grounded())
             {
                 Hit(DownAttackTransfrom, DownAttackArea, ref pstate.recoilingY, recoilYSpeed);
+                anim.SetTrigger("dwonattack");
             }
         }
     }
@@ -369,7 +372,7 @@ public class playercontroller : MonoBehaviour
             }
             else if (!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump"))
             {
-                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 if (Walled())
                 {
                     rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2f), rb.linearVelocity.y);
@@ -378,10 +381,10 @@ public class playercontroller : MonoBehaviour
                 pstate.jumping = true;
                 airJumpCounter++;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
-               
+                
             }
         }
-        anim.SetBool("Jumping", !Grounded());
+        anim.SetBool("jump", !Grounded());
     }
 
     void UpdateJumpVariables()
@@ -409,7 +412,7 @@ public class playercontroller : MonoBehaviour
     private bool Walled()
     {
         if (Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.right, groundCheckX, whatIsGround) || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.left, groundCheckX, whatIsGround))
-        { 
+        {
             return true;
         }
         else
@@ -466,11 +469,14 @@ public class playercontroller : MonoBehaviour
     private void PleyerPostionReset()
     {
         if (gameObject.transform.position == lastposition.transform.position) this.gameObject.transform.position += new Vector3(1, 1, 0);
-        else this.gameObject.transform.position = lastposition.transform.position ;
+        else this.gameObject.transform.position = lastposition.transform.position;
     }
     public void healnow()
     {
         health = 20;
         Debug.Log(1);
     }
+
+
+
 }
