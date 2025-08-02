@@ -2083,6 +2083,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4155686769246634400, guid: 0f10d2a0615d32d4aac5aac53de71ad1, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 328333944607476895, guid: 0f10d2a0615d32d4aac5aac53de71ad1, type: 3}
       propertyPath: health
       value: 10
@@ -2091,6 +2095,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1544973378}
+    - target: {fileID: 328333944607476895, guid: 0f10d2a0615d32d4aac5aac53de71ad1, type: 3}
+      propertyPath: damager
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 328333944607476895, guid: 0f10d2a0615d32d4aac5aac53de71ad1, type: 3}
+      propertyPath: interval
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1833139704363851951, guid: 0f10d2a0615d32d4aac5aac53de71ad1, type: 3}
       propertyPath: player
       value: 
