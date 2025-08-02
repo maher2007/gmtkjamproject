@@ -34,25 +34,35 @@ public class AOE_Enemy : Enemy
         }
 
         aoeZone.SetActive(false);
-        StartCoroutine(AOELoop());
+       
     }
 
+    private void Update()
+    {
+        base.Update();
+        if (aoeZone == null) Destroy(gameObject);
+    }
     private IEnumerator AOELoop()
     {
-        while (true)
+        aoe_StateList.IsWaitingForAttack = true;
+        aoe_StateList.IsAttacking = false;
+        yield return new WaitForSeconds(interval);
+         // Activate AOE
+        aoeZone.SetActive(true);
+        aoe_StateList.IsWaitingForAttack = false;
+        aoe_StateList.IsAttacking = true;
+        yield return new WaitForSeconds(activeDuration);
+        aoeZone.SetActive(false);
+        Destroy(this.gameObject);
+         
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("player"))
         {
-            aoe_StateList.IsWaitingForAttack = true;
-            aoe_StateList.IsAttacking = false;
-            yield return new WaitForSeconds(interval);
-            // Activate AOE
-            aoeZone.SetActive(true);
-            aoe_StateList.IsWaitingForAttack = false;
-            aoe_StateList.IsAttacking = true;
-            yield return new WaitForSeconds(activeDuration);
-            aoeZone.SetActive(false);
+            StartCoroutine(AOELoop());
         }
     }
-
 
 
     // (Optional) Visual debug
