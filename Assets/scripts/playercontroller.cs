@@ -115,6 +115,8 @@ public class playercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkifdead();
+
         GetInput();
         UpdateJumpVariables();
         if (pstate.Dashing) return;
@@ -125,7 +127,6 @@ public class playercontroller : MonoBehaviour
         Attack();
         RestoreTimeScale();
         FlashWhileInvincible();
-        checkifdead();
         
     }
     private void FixedUpdate()
