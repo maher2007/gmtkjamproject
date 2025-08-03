@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Hierarchy;
 using UnityEngine;
 
 public class BreakableObject : MonoBehaviour
@@ -9,6 +10,9 @@ public class BreakableObject : MonoBehaviour
     private float XPosotion;
     private float YPosotion;
     private float ZPosotion;
+    private bool canbreak;
+    [SerializeField]LayerMask player;
+    [SerializeField] Transform playercheck;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,10 +25,11 @@ public class BreakableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (blockdurablity == 0)
+        if (blockdurablity <= 0)
         {
             Destroy(gameObject);
         }
+        
     }
     private void OnEnable()
     {
@@ -32,13 +37,28 @@ public class BreakableObject : MonoBehaviour
     }
     private void BlockDurablity()
     {
-        blockdurablity--;
-        StartCoroutine(Shake());
+        if (onplayer())
+        {
+            blockdurablity--;
+            StartCoroutine(Shake());
+        }
     }
     IEnumerator Shake()
     {
         gameObject.transform.position = new Vector3(XPosotion,YPosotion - 0.1f ,ZPosotion);
         yield return new WaitForSeconds(0.1f);
         gameObject.transform.position = new Vector3(XPosotion,YPosotion,ZPosotion);
+    }
+
+    public bool onplayer()
+    {
+        if (Physics2D.Raycast(playercheck.position, Vector2.up, 1f, player))
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
     }
 }
