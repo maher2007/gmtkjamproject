@@ -373,7 +373,7 @@ public class playercontroller : MonoBehaviour
                 
             }
         }
-        anim.SetBool("jump", !Grounded() && !Walled());
+        anim.SetBool("jump", !Grounded());
     }
 
     void UpdateJumpVariables()
@@ -412,7 +412,6 @@ public class playercontroller : MonoBehaviour
     {
         if (Walled() && !Grounded() && WillThiswalljump)
         {
-            anim.SetBool("jump", false);
             anim.SetBool("wallslide",Walled() && !Grounded());
             pstate.WallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -WallSlidingSpeed, float.MaxValue));
@@ -421,7 +420,7 @@ public class playercontroller : MonoBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 if (Walled())
                 {
-                    rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -5f), rb.linearVelocity.y);
+                    rb.linearVelocity = new Vector2(transform.position.x * (transform.localScale.x * -2f), rb.linearVelocity.y);
                     airJumpCounter--;
                 }
                 pstate.jumping = true;
