@@ -1004,6 +1004,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3425003262865815871, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: restartscreen
+      value: 
+      objectReference: {fileID: 1207910271}
+    - target: {fileID: 3425003262865815871, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
       propertyPath: WallSlidingSpeed
       value: 10
       objectReference: {fileID: 0}

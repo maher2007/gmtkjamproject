@@ -911,6 +911,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3165619773473902714, guid: 9c2e5a1eff495874bae81e0cfca2c5f8, type: 3}
+      propertyPath: kill
+      value: 
+      objectReference: {fileID: 1207910271}
+    - target: {fileID: 3165619773473902714, guid: 9c2e5a1eff495874bae81e0cfca2c5f8, type: 3}
       propertyPath: lastposition
       value: 
       objectReference: {fileID: 1153808158}

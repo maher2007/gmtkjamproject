@@ -1252,6 +1252,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3425003262865815871, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: restartscreen
+      value: 
+      objectReference: {fileID: 1207910271}
+    - target: {fileID: 3425003262865815871, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
       propertyPath: WillThiswalljump
       value: 0
       objectReference: {fileID: 0}

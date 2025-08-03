@@ -8765,6 +8765,10 @@ PrefabInstance:
       propertyPath: lastposition
       value: 
       objectReference: {fileID: 1153808158}
+    - target: {fileID: 2366651861605469073, guid: 59a81a71ec975444091571f9da5464fa, type: 3}
+      propertyPath: restartscreen
+      value: 
+      objectReference: {fileID: 1207910271}
     - target: {fileID: 7132560527873487124, guid: 59a81a71ec975444091571f9da5464fa, type: 3}
       propertyPath: m_Name
       value: player Variant 1
