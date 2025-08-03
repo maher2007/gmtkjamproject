@@ -34,7 +34,6 @@ public class BreakableObject : MonoBehaviour
     {
         blockdurablity--;
         StartCoroutine(Shake());
-        Debug.Log("1");
     }
     IEnumerator Shake()
     {

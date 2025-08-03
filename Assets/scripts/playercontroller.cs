@@ -462,7 +462,7 @@ public class playercontroller : MonoBehaviour
 
     private void MoveLastPoistion()
     {
-        if (Grounded())
+        if (Grounded() && !Onbrakable())
         {
             lastposition.transform.position = gameObject.transform.position;
         }
