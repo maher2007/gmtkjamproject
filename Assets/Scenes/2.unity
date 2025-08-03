@@ -907,7 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a47cd7a5031574db9b26088fea023c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playercontroller: {fileID: 0}
+  playercontroller: {fileID: 772984646}
   restartscreen: {fileID: 1207910271}
 --- !u!483693784 &368940591
 TilemapRenderer:
@@ -2985,6 +2985,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: flying enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 772984646}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: object1
+      value: 
+      objectReference: {fileID: 1980604548}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3597,6 +3605,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: flying enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 772984646}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: object1
+      value: 
+      objectReference: {fileID: 1980604548}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4091,6 +4107,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: flying enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 772984646}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: object1
+      value: 
+      objectReference: {fileID: 1980604548}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4393,6 +4417,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: flying enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 772984646}
+    - target: {fileID: 5078809676946925460, guid: 6be461f38e19e78449638b083f97183b, type: 3}
+      propertyPath: object1
+      value: 
+      objectReference: {fileID: 1980604548}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5745,6 +5777,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59a81a71ec975444091571f9da5464fa, type: 3}
+--- !u!4 &1980604548 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 924465768581527789, guid: 59a81a71ec975444091571f9da5464fa, type: 3}
+  m_PrefabInstance: {fileID: 1980604547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2020211533 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9156223519952817076, guid: d001124f96089024da407c9b4ff37ec2, type: 3}

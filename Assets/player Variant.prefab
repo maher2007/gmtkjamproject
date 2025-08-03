@@ -215,6 +215,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
+      propertyPath: recoilXSteps
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
+      propertyPath: recoilYsteps
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: Breakable.m_Bits
       value: 128
       objectReference: {fileID: 0}
