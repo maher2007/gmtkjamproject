@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: sr
       value: 
       objectReference: {fileID: 7920521798050147615}
+    - target: {fileID: 3425003262865815871, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: WillThisDash
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3425003262865815871, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
+      propertyPath: WillThiswalljump
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6094080620498231805, guid: a78ab3457ac93ad408e8da5b5ee90d8d, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 0.17

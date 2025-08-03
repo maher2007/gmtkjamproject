@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: jumpForce
-      value: 45
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: killscript
@@ -228,7 +228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: WillThiswalljump
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: jumpBufferFrames
@@ -240,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3924154913199544738, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: WillThisBreakObjects
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4921266141446391360, guid: beb2c1d6841d2a44586b8a436d3a0513, type: 3}
       propertyPath: m_Layer
