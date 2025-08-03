@@ -231,6 +231,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   click: {fileID: 8300000, guid: e71cf5504e163a647b9b2f3046bae37a, type: 3}
   hover: {fileID: 8300000, guid: eec2b48d5c5fef54b9261b977cc12710, type: 3}
+  attack: {fileID: 8300000, guid: 13ce9b224fa2b1a499e5b61475a6ee16, type: 3}
+  walk: {fileID: 8300000, guid: 6fcef1554c61b93458f45ae11f8bbb51, type: 3}
+  jump: {fileID: 8300000, guid: 9be1dbe23f151c342af7b3889b5a9408, type: 3}
   gameplaySource: {fileID: 173416219}
   menuSource: {fileID: 173416218}
   gameplayMusic: {fileID: 8300000, guid: b66f5fe701b61f444abd4897bec3e572, type: 3}

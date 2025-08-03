@@ -2,12 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class audiomaneger : MonoBehaviour
+public class audiomaneger : MonoBehaviour 
 {
     public static audiomaneger Instance;
     
     public AudioClip click;
     public AudioClip hover;
+    public AudioClip attack;
+    public AudioClip walk;
+    public AudioClip jump;
+
 
     private AudioSource soundplayer;
     private AudioSource musicplayer;

@@ -162,6 +162,7 @@ public class playercontroller : MonoBehaviour
         rb.linearVelocity = new Vector2(walkSpeed * xAsis, rb.linearVelocity.y);
         anim.SetBool("walk", pstate.walking);
         pstate.walking = (Grounded() && xAsis != 0 && !pstate.Dashing && !pstate.recoilingX && !pstate.recoilingY);
+
     }
     void StratDash()
     {
@@ -196,6 +197,8 @@ public class playercontroller : MonoBehaviour
         timeSinceAttack += Time.deltaTime;
         if (attack && timeSinceAttack >= timeBetweenAttack)
         {
+            audiomaneger.Instance.playsound(audiomaneger.Instance.attack);
+
             timeSinceAttack = 0;
             
             if (yAsis == 0 || yAsis < 0 && Grounded())
@@ -362,6 +365,7 @@ public class playercontroller : MonoBehaviour
         
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0)
         {
+
             rb.linearVelocity = new Vector2(x: rb.linearVelocity.x, y: 0);
             pstate.jumping = false;
         }
@@ -371,7 +375,9 @@ public class playercontroller : MonoBehaviour
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 pstate.jumping = true;
-                
+
+                audiomaneger.Instance.playsound(audiomaneger.Instance.jump);
+
             }
         }
         anim.SetBool("jump", !Grounded());
@@ -403,6 +409,7 @@ public class playercontroller : MonoBehaviour
     {
         if (Physics2D.Raycast(WallCheck.position, Vector2.right, groundCheckX, whatIsGround) || Physics2D.Raycast(WallCheck.position, Vector2.left, groundCheckX, whatIsGround))
         {
+
             return true;
         }
         else
