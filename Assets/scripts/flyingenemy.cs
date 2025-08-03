@@ -41,5 +41,12 @@ public class DistanceMeasurer : Enemy
     {
         base.EnemyHit(_damageDone, _hitDirection, _hitForce);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("player"))
+        {
+            collision.gameObject.GetComponent<playercontroller>().TakeDamge(5);
+        }
+    }
 
 }

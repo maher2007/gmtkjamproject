@@ -32,14 +32,6 @@ public class AOEPatrolEnemy : MonoBehaviour
         StartCoroutine(PatrolLoop());
     }
 
-   void Update()
-    {
-        if (transform.position.x >= 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else { spriteRenderer.flipX = true; }
-    }
 
     private IEnumerator PatrolLoop()
     {
@@ -58,6 +50,12 @@ public class AOEPatrolEnemy : MonoBehaviour
                 {
                     transform.position = Vector3.MoveTowards(transform.position, target, speedr * Time.deltaTime);
                     yield return null;
+                }
+                if (target == pointB.position)
+                { spriteRenderer.flipX = false; }
+                else
+                {
+                    spriteRenderer.flipX = true;
                 }
                 // Arrived: flip direction after waiting
                 movingToB = !movingToB;
