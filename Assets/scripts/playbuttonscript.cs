@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
     {
         audiomaneger.Instance.playsound(audiomaneger.Instance.hover);
     }
+
+
     public void PlayGame()
     {
         audiomaneger.Instance.playsound(audiomaneger.Instance.click);
