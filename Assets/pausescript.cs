@@ -20,12 +20,10 @@ public class pausescript : MonoBehaviour
 
         if (isPaused)
         {
-            Debug.Log("Press Pause");
             audiomaneger.Instance?.PlayMenuMusic(); // <- TRANSITION TO MENU MUSIC
         }
         else
         {
-            Debug.Log("Press UnPause");
             audiomaneger.Instance?.PlayGameplayMusic(); // Optional: resume gameplay music
         }
 

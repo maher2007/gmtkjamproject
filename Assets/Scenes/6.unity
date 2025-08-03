@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountofparallox: 0
-  maincamire: {fileID: 0}
+  maincamire: {fileID: 428055924}
 --- !u!212 &34977801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6009,7 +6009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountofparallox: 0.4
-  maincamire: {fileID: 0}
+  maincamire: {fileID: 428055924}
 --- !u!212 &564749304
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7373,7 +7373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountofparallox: 0.2
-  maincamire: {fileID: 0}
+  maincamire: {fileID: 428055924}
 --- !u!212 &977605590
 SpriteRenderer:
   m_ObjectHideFlags: 0
