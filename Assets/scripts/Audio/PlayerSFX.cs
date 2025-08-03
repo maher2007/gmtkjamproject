@@ -23,6 +23,9 @@ public class PlayerSFX : MonoBehaviour
     [SerializeField] private AudioClip[] damageClips;
     [SerializeField] private AudioClip[] deathClips;
 
+    [Header("Block Break Clips")]
+    [SerializeField] private AudioClip[] blockBreakClips;
+
 
     private playerstatelist playerState;
 
@@ -45,7 +48,7 @@ public class PlayerSFX : MonoBehaviour
     //Call via Animation Event
     public void PlayFootstep()
     {
-        // if (!playerState.grounded)              // Use if grounded state is added to playerstatelist script
+        if (!playerState.OnGround)              
             PlaySFX(footstepClips);
   
     }
@@ -78,7 +81,7 @@ public class PlayerSFX : MonoBehaviour
     public void PlayWallSlideClip()
     {
 
-     //   if (playerState.sliding)        // add if sliding state is added to the playerstatelist script
+        if (playerState.WallSliding)        
             WallSlideHandle();
                          
     }
@@ -98,7 +101,17 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayDeath()
     {
+        Debug.Log("Death SFX PLAYING");
+        audiomaneger.Instance.StopGameplayMusic();
+        audiomaneger.Instance.PlayMenuMusic();
         PlaySFX(deathClips);
+    }
+
+
+    // Block breaking SFX
+    public void PlayBlockBreak()                
+    {
+        PlaySFX(blockBreakClips);
     }
 
 

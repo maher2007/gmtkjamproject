@@ -16,6 +16,19 @@ public class pausescript : MonoBehaviour
         audiomaneger.Instance.playsound(audiomaneger.Instance.click);
         isPaused = !isPaused;
         pauseMenuCanvas.SetActive(isPaused);
+       
+
+        if (isPaused)
+        {
+            Debug.Log("Press Pause");
+            audiomaneger.Instance?.PlayMenuMusic(); // <- TRANSITION TO MENU MUSIC
+        }
+        else
+        {
+            Debug.Log("Press UnPause");
+            audiomaneger.Instance?.PlayGameplayMusic(); // Optional: resume gameplay music
+        }
+
         Time.timeScale = isPaused ? 0f : 1f;
     }
 
